@@ -1,0 +1,119 @@
+🛠️ Development Environment SetupTo get this Spring Boot project running locally, please download and install the following tools.
+📦 Required Software
+Software                  PurposeJava 
+JDK 17                    Required to run the Spring Boot application.
+VS Code                   Primary code editor/IDE.
+PostgreSQLRelational      database to store application data.
+MavenDependency           management and build tool.
+Docker Desktop            To containerize and run the app/services easily.
+PostmanTool               for testing the REST APIs.
+
+🔹Phase 0: Install links (Windows friendly)
+
+Java 17
+👉 https://adoptium.net
+After install, open Command Prompt and check:
+java -version
+
+VS Code
+👉 https://code.visualstudio.com/
+
+PostgreSQL
+👉 https://www.postgresql.org/download/windows/
+Remember the password you set.
+
+Maven
+👉 https://maven.apache.org/download.cgi
+(Add it to PATH if needed)
+Check:
+mvn -version
+
+Docker Desktop
+👉 https://www.docker.com/products/docker-desktop/
+
+Postman
+👉 https://www.postman.com/downloads/
+
+PHASE 1: Create Spring Boot Project (NO CODING YET)
+Step 1: Open browser → go to
+👉 https://start.spring.io
+
+Step 2: Fill like this
+Project: Maven
+Language: Java
+Spring Boot: 3.2.x
+Group: com.ewallet
+Artifact: ewallet-api
+Java: 17
+
+Step 3: Add dependencies (VERY IMPORTANT)
+✔ Spring Web
+✔ Spring Data JPA
+✔ PostgreSQL Driver
+✔ Spring Security
+✔ Validation
+✔ Lombok
+✔ Spring Boot Actuator
+
+Step 4:
+Click Generate → ZIP file downloads
+👉 Extract it
+PHASE 3: Run project (first time)
+Open Terminal in VS Code
+(Menu → Terminal → New Terminal)
+
+Run:
+mvn spring-boot:run
+If you see:
+Tomcat started on port 8080
+🎉 SUCCESS! Your backend is running.
+Check browser:
+http://localhost:8080
+
+🧩 PHASE 4: Setup PostgreSQL Database (VERY EASY)
+Step 1: Open pgAdmin OR Command Prompt
+Login with postgres password
+
+Step 2: Run these commands
+CREATE DATABASE ewallet_db;
+CREATE USER ewallet_user WITH PASSWORD 'ewallet_pass123';
+GRANT ALL PRIVILEGES ON DATABASE ewallet_db TO ewallet_user;
+
+
+Done ✅
+🧩 PHASE 5: Connect Spring Boot to Database
+
+Open file:
+
+src/main/resources/application.yml
+Paste this:
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ewallet_db
+    username: ewallet_user
+    password: ewallet_pass123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+Restart app:
+mvn spring-boot:run
+Spring Boot will auto-create tables 🎯
+
+🧩 PHASE 6: Project Structure (VERY IMPORTANT)
+Inside:
+src/main/java/com/ewallet/ewalletapi
+
+
+Create folders:
+controller
+service
+repository
+model
+dto
+exception
+config
+This is industry standard structure.
